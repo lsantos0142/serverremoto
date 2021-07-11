@@ -1,0 +1,1 @@
+web: gunicorn --chdir projeto projeto.wsgi
