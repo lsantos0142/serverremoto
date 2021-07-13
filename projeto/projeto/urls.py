@@ -20,4 +20,5 @@ from server_remoto import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.menu_inicial, name = 'menu'),
+    path('sincronizar', views.sincronizar, name = 'sincronizar'),
 ]
