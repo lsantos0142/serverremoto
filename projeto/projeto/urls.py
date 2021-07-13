@@ -23,9 +23,10 @@ from server_remoto.api import viewsets
 route = routers.DefaultRouter()
 
 route.register(r'Pacientes', viewsets.PacienteViewSet, basename = "Pacientes")
+route.register(r'Imunizacoes', viewsets.ImunizacaoViewSet, basename = "Imunizações")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(route.urls)),
-    path('menu', views.menu_inicial, name = "menu")
+    path('', views.menu_inicial, name = "menu")
 ]

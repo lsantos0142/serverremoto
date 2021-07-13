@@ -5,5 +5,7 @@
 </head>
 <body>
     <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-</body>
+    <form method="POST"> {% csrf_token %}
+        <input type='submit' value='Deletar Banco de dados!' name = "deletar_db"/>
+    </form>
 </html>
