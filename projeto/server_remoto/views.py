@@ -10,13 +10,3 @@ from django.core import serializers
 def menu_inicial(request):
     return render(request, "menu_inicial.html", {})
 
-def sincronizar(request):
-    if request.method == "POST":
-        x = {'foo': 'bar'}
-        req_paciente = Paciente(paciente=x)
-        req_paciente.save()
-    numero_de_pacientes = Paciente.objects.all().count()
-    for i in range(0,numero_de_pacientes):
-        paci = Paciente.objects.all()[i]
-        serialized_obj = serializers.serialize('json', [paci])
-    return JsonResponse({Paciente.objects.all()})
