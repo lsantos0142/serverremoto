@@ -10,3 +10,13 @@ class ImunizacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Imunizacao
         fields = '__all__'
+
+class LoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Lote
+        fields = '__all__'
+
+class PerdasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Perdas
+        fields = '__all__'

@@ -24,6 +24,8 @@ route = routers.DefaultRouter()
 
 route.register(r'Pacientes', viewsets.PacienteViewSet, basename = "Pacientes")
 route.register(r'Imunizacoes', viewsets.ImunizacaoViewSet, basename = "Imunizações")
+route.register(r'Lotes', viewsets.LoteViewSet, basename = "Lotes")
+route.register(r'Perdas', viewsets.PerdasViewSet, basename = "Perdas")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

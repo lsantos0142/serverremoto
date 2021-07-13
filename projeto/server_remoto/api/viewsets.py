@@ -9,3 +9,11 @@ class PacienteViewSet(viewsets.ModelViewSet):
 class ImunizacaoViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ImunizacaoSerializer
     queryset = models.Imunizacao.objects.all()
+
+class LoteViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.LoteSerializer
+    queryset = models.Lote.objects.all()
+
+class PerdasViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.PerdasSerializer
+    queryset = models.Perdas.objects.all()
