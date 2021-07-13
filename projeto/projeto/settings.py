@@ -79,11 +79,14 @@ WSGI_APPLICATION = 'projeto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dau37gnbip55kq',
+        'HOST': 'ec2-35-171-250-21.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'wiptrjixgnndrk',
+        'PASSWORD': '4f87bc8070ae47303f37f0446bb5e5e90b742dc184a32447fc50f6d461c217d6'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
