@@ -264,7 +264,7 @@ class Imunizacao(models.Model):
 
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Paciente")
     
-    comorbidades = MultiSelectField(default=None, blank=True,choices = comorbidades, verbose_name="Comorbidades") # Se grupo=COMORBIDADE
+    comorbidades = models.CharField(default=None, blank=True, verbose_name="Comorbidades",max_length=300) # Se grupo=COMORBIDADE
     CRM_medico_resp = models.IntegerField(null=True, default=None, blank=True, verbose_name="CRM médico responsável") # Se grupo=COMORBIDADE
     
     num_BPC = models.IntegerField(null=True, default=None, blank=True, verbose_name="Número do BPC") # Se grupo=PESSOA COM DEFICIENCIA PERMANENTEMENTE SEVERA
