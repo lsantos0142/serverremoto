@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from server_remoto import models
+#from server_remoto import models
+from .. import models
 
 class PacienteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +11,12 @@ class PacienteSerializer(serializers.ModelSerializer):
 class ImunizacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Imunizacao
+        #fields = ['paciente_CPF', 'paciente_CNS', 'comorbidades', 'CRM_medico_resp',
+        #          'num_BPC', 'dose', 'imunobiologico', 'lote', 'via_admn', 'local_admn',
+        #          'vacinador', 'grupo', 'estrategia', 'data_aplic', 'data_apraz',
+        #          'estado_1_dose', 'pais_1_dose','modificado']
         fields = '__all__'
+
 
 class LoteSerializer(serializers.ModelSerializer):
     class Meta:
