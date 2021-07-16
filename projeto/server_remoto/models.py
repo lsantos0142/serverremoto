@@ -220,6 +220,10 @@ class Paciente(models.Model):
     def __str__(self):
         return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
 
+    def create(self, validated_data):
+        paciente = Paciente.objects.update_or_create(**validated_data)
+        return paciente
+
 class Imunobiologico(models.Model):
     imunobiologico = models.CharField(max_length=30)
     doses = models.IntegerField()
