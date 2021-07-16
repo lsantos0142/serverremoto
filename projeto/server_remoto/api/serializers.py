@@ -6,6 +6,17 @@ class PacienteSerializer(serializers.ModelSerializer):
         model = models.Paciente
         fields = '__all__'
 
+    def create(self, validated_data):
+        if models.Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')):
+            models.Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).update(**validated_data)
+            paciente = models.Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).values()[0]
+        elif models.Paciente.objects.filter(CNS__iexact=validated_data.get('CNS')):
+            models.Paciente.objects.filter(CNS__iexact=validated_data.get('CNS')).update(**validated_data)
+            paciente = models.Paciente.objects.filter(CPF__iexact=validated_data.get('CNS')).values()[0]
+        else:
+            paciente = models.Paciente.objects.create(**validated_data)
+        return paciente
+
 class ImunizacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Imunizacao

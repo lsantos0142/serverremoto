@@ -220,17 +220,6 @@ class Paciente(models.Model):
     def __str__(self):
         return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
 
-    def create(self, validated_data):
-        if Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')):
-            Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).update(**validated_data)
-            paciente = Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).values()[0]
-        elif Paciente.objects.filter(CNS__iexact=validated_data.get('CNS')):
-            Paciente.objects.filter(CNS__iexact=validated_data.get('CNS')).update(**validated_data)
-            paciente = Paciente.objects.filter(CPF__iexact=validated_data.get('CNS')).values()[0]
-        else:
-            paciente = Paciente.objects.create(**validated_data)
-
-        return paciente
 
 class Imunobiologico(models.Model):
     imunobiologico = models.CharField(max_length=30)
