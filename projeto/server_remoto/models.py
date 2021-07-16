@@ -308,4 +308,4 @@ class Imunizacao(models.Model):
 
 
 class AtualizaServer(models.Model):
-    atualiza = models.BooleanField()
+    data_atualizacao = models.DateTimeField(verbose_name="Última Atualização")
