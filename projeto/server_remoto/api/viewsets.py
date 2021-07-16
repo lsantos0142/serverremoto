@@ -66,3 +66,15 @@ class LoteViewSet(viewsets.ModelViewSet):
 class PerdasViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PerdasSerializer
     queryset = models.Perdas.objects.all()
+
+class AtualizaServerViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.AtualizaServerSerializer
+    queryset = models.AtualizaServer.objects.all()
+    http_method_names = ['get', 'patch', 'head']
+
+    def patch(self, request, *args, **kwargs):
+        atualiza1 = models.AtualizaServer.objects.all()[0]
+        serializer = serializers.AtualizaServerSerializer(instance = atualiza1, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)

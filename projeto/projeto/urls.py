@@ -26,6 +26,7 @@ route.register(r'Pacientes', viewsets.PacienteViewSet, basename = "Pacientes")
 route.register(r'Imunizacoes', viewsets.ImunizacaoViewSet, basename = "Imunizações")
 route.register(r'Lotes', viewsets.LoteViewSet, basename = "Lotes")
 route.register(r'Perdas', viewsets.PerdasViewSet, basename = "Perdas")
+route.register(r'Atualizar', viewsets.AtualizaServerViewSet, basename = "Atualizar")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

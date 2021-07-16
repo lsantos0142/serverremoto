@@ -27,3 +27,8 @@ class PerdasSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Perdas
         fields = '__all__'
+
+class AtualizaServerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.AtualizaServer
+        fields = '__all__'
