@@ -305,3 +305,7 @@ class Imunizacao(models.Model):
     
     def __str__(self):
         return str('CPF: '+str(self.paciente.CPF)+', Nome: '+self.paciente.nome + ', Imuno.: ' + self.imunobiologico.imunobiologico + ', dose: ' + self.dose)
+
+
+class AtualizaServer(models.Model):
+    atualiza = models.BooleanField()
