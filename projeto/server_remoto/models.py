@@ -222,9 +222,11 @@ class Paciente(models.Model):
 
     def create(self, validated_data):
         if Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')):
-            paciente = Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).update(**validated_data)
+            Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).update(**validated_data)
+            paciente = Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).values()[0]
         elif Paciente.objects.filter(CNS__iexact=validated_data.get('CNS')):
-            paciente = Paciente.objects.filter(CNS__iexact=validated_data.get('CNS')).update(**validated_data)
+            Paciente.objects.filter(CNS__iexact=validated_data.get('CNS')).update(**validated_data)
+            paciente = Paciente.objects.filter(CPF__iexact=validated_data.get('CNS')).values()[0]
         else:
             paciente = Paciente.objects.create(**validated_data)
 
