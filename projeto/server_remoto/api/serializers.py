@@ -6,7 +6,7 @@ class PacienteSerializer(serializers.ModelSerializer):
         model = models.Paciente
         fields = '__all__'
 
-    def create(self, validated_data):
+    def perform_create(self, validated_data):
         if models.Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')):
             models.Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).update(**validated_data)
             paciente = models.Paciente.objects.filter(CPF__iexact=validated_data.get('CPF')).values()[0]
