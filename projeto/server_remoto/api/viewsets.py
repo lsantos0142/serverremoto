@@ -11,6 +11,8 @@ class PacienteViewSet(viewsets.ModelViewSet):
             paciente = models.Paciente.objects.filter(CPF__iexact=request.data.get('CPF'))[0]
         elif models.Paciente.objects.filter(CNS__iexact=request.data.get('CNS')):
             paciente = models.Paciente.objects.filter(CPF__iexact=request.data.get('CNS'))[0]
+        else:
+            paciente = models.Paciente.objects.create(**request.data)
         serializer = serializers.PacienteSerializer(instance=paciente, data=request.data)
         if serializer.is_valid():
             serializer.save()
