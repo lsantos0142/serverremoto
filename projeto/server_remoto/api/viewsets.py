@@ -1,4 +1,4 @@
-from ..models import Imunobiologico
+from ..models import Imunobiologico, Paciente
 from rest_framework import viewsets
 from server_remoto import models
 from server_remoto.api import serializers
@@ -13,7 +13,7 @@ class PacienteViewSet(viewsets.ModelViewSet):
         if models.Paciente.objects.filter(CPF__iexact=request.data.get('CPF')):
             paciente = models.Paciente.objects.filter(CPF__iexact=request.data.get('CPF'))[0]
         elif models.Paciente.objects.filter(CNS__iexact=request.data.get('CNS')):
-            paciente = models.Paciente.objects.filter(CPF__iexact=request.data.get('CNS'))[0]
+            paciente = models.Paciente.objects.filter(CNS__iexact=request.data.get('CNS'))[0]
         else:
             paciente = models.Paciente.objects.create(**request.data)
         serializer = serializers.PacienteSerializer(instance=paciente, data=request.data)
@@ -36,25 +36,30 @@ class ImunizacaoViewSet(viewsets.ModelViewSet):
         paciente_CPF = data.pop('paciente_CPF')
         paciente_CNS = data.pop('paciente_CNS')
         if paciente_CPF:
-            paciente_pk = models.Paciente.objects.filter(CPF=paciente_CPF).first().id
+            paciente_pk = models.Paciente.objects.filter(CPF=paciente_CPF).first()
         else:
-            paciente_pk = models.Paciente.objects.filter(CNS=paciente_CNS).first().id
+            paciente_pk = models.Paciente.objects.filter(CNS=paciente_CNS).first()
 
         imunobiologico = data.pop('imunobiologico')
-        imunobiologico_pk = models.Imunobiologico.objects.filter(imunobiologico=imunobiologico).first().id
+        imunobiologico_pk = models.Imunobiologico.objects.filter(imunobiologico=imunobiologico).first()
 
         lote = data.pop('lote')
-        lote_pk = models.Lote.objects.filter(lote=lote).first().id # Corrigir aqui para levar em conta não somente o nome do lote como também o nome do imunobiológico
+        lote_pk = models.Lote.objects.filter(lote=lote).first()
 
         vacinador = data.pop('vacinador')
-        vacinador_pk = User.objects.filter(username=vacinador).first().id
+        vacinador_pk = User.objects.filter(username=vacinador).first()
 
         data['paciente'] = paciente_pk
         data['imunobiologico'] = imunobiologico_pk
         data['lote'] = lote_pk
         data['vacinador'] = vacinador_pk
-        print(data)
-        serializer = serializers.ImunizacaoSerializer(data=data)
+
+        if models.Imunizacao.objects.filter(paciente__exact=data['paciente']).filter(dose__exact=data['dose']):
+            imunizacao = models.Imunizacao.objects.filter(paciente__exact=data['paciente']).filter(dose__exact=data['dose'])[0]
+        else:
+            imunizacao = models.Imunizacao.objects.create(**request.data)
+
+        serializer = serializers.ImunizacaoSerializer(instance=imunizacao, data=data)
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
