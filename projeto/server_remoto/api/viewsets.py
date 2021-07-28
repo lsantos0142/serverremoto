@@ -10,9 +10,9 @@ class PacienteViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PacienteSerializer
     queryset = models.Paciente.objects.all()
     def patch(self, request, *args, **kwargs):
-        if models.Paciente.objects.filter(CPF__iexact=request.data.get('CPF')):
+        if models.Paciente.objects.filter(CPF__iexact=request.data.get('CPF')) and request.data.get('CPF') != None:
             paciente = models.Paciente.objects.filter(CPF__iexact=request.data.get('CPF'))[0]
-        elif models.Paciente.objects.filter(CNS__iexact=request.data.get('CNS')):
+        elif models.Paciente.objects.filter(CNS__iexact=request.data.get('CNS')) and request.data.get('CNS') != None:
             paciente = models.Paciente.objects.filter(CNS__iexact=request.data.get('CNS'))[0]
         else:
             paciente = models.Paciente.objects.create(**request.data)
